@@ -1,14 +1,10 @@
-// src/App.js
 import React from 'react';
-import './App.css';
-import RaceAnimation from './components/RaceAnimation/RaceAnimation';
+import RaceTrack from './components/RaceTrack/RaceTrack';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <RaceAnimation />
-      </header>
+    <div>
+      <RaceTrack numberOfLanes={26} />
     </div>
   );
 }

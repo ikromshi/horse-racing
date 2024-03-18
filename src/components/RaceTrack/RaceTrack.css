@@ -1,0 +1,16 @@
+/* src/components/RaceTrack/RaceTrack.css */
+.race-track {
+    background-color: #333; /* Dark background for the track */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align cars to the start line */
+  }
+  
+  .lane {
+    width: 100%;
+    border: 1px solid #555; /* Slight contrast for lanes */
+    margin: 5px 0;
+    display: flex; /* Ensure cars within lanes are flex items for alignment */
+  }
+  
