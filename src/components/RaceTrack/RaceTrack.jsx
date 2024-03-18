@@ -68,13 +68,6 @@ const carsData = [
 ];
 
 
-// Calculate position based on ticket amount (Example: linear scale, you might need to adjust this)
-const calculatePosition = (ticket_amount) => {
-  // Assuming 100 tickets places the car at 90% towards the top, adjust as needed
-  const maxTickets = Math.max(...carsData.map(car => car.ticket_amount));
-  return (ticket_amount / maxTickets) * 90;
-};
-
 // Calculate horizontal position based on ticket amount
 const calculateHorizontalPosition = (ticket_amount) => {
   const maxTickets = 200; // Define the maximum number of tickets
