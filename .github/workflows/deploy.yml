@@ -25,5 +25,5 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: build/
-        server-dir: /home/u115467450/domains/ikromshi.com/public_html/bh/
+        server-dir: /home/u115467450/domains/ikromshi.com/public_html/sd/
 
