@@ -33,37 +33,38 @@ const Car = styled.img`
   // You might need to tweak this after inspecting the actual rendered output
   top: 50%;
   transform: translateY(-50%); // This ensures the car is centered regardless of its height
+  right: ${props => props.position}%; /* Position based on tickets */
   filter: ${props => `hue-rotate(${props.color}deg)`}; // Change color through hue rotation
   transition: bottom 0.5s ease-in-out; // Smooth transition for the movement
 `;
 
 
 const carsData = [
-  { name: "Alex", ticket_amount: 120 },
-  { name: "Jordan", ticket_amount: 95 },
-  { name: "Casey", ticket_amount: 150 },
-  { name: "Morgan", ticket_amount: 130 },
-  { name: "Taylor", ticket_amount: 110 },
+  { name: "Alex", ticket_amount: 20 },
+  { name: "Jordan", ticket_amount: 5 },
+  { name: "Casey", ticket_amount: 50 },
+  { name: "Morgan", ticket_amount: 30 },
+  { name: "Taylor", ticket_amount: 10 },
   { name: "Jamie", ticket_amount: 80 },
-  { name: "Quinn", ticket_amount: 145 },
-  { name: "Reese", ticket_amount: 90 },
-  { name: "Skyler", ticket_amount: 100 },
+  { name: "Quinn", ticket_amount: 45 },
+  { name: "Reese", ticket_amount: 0 },
+  { name: "Skyler", ticket_amount: 9 },
   { name: "Drew", ticket_amount: 50 },
-  { name: "Cameron", ticket_amount: 60 },
+  { name: "Cameron", ticket_amount: 12 },
   { name: "Riley", ticket_amount: 70 },
-  { name: "Avery", ticket_amount: 85 },
+  { name: "Avery", ticket_amount: 23 },
   { name: "Peyton", ticket_amount: 75 },
-  { name: "Harper", ticket_amount: 65 },
-  { name: "Charlie", ticket_amount: 55 },
-  { name: "Dakota", ticket_amount: 45 },
+  { name: "Harper", ticket_amount: 11 },
+  { name: "Charlie", ticket_amount: 7 },
+  { name: "Dakota", ticket_amount: 9 },
   { name: "Emerson", ticket_amount: 35 },
   { name: "Finley", ticket_amount: 25 },
   { name: "Elliot", ticket_amount: 15 },
   { name: "Jordan", ticket_amount: 5 },
   { name: "Logan", ticket_amount: 140 },
-  { name: "Logan", ticket_amount: 140 },
-  { name: "Spencer", ticket_amount: 115 },
-  { name: "Spencer", ticket_amount: 115 }
+  { name: "Logan", ticket_amount: 36 },
+  { name: "Spencer", ticket_amount: 44 },
+  { name: "Spencer", ticket_amount: 150 }
 ];
 
 
@@ -74,6 +75,13 @@ const calculatePosition = (ticket_amount) => {
   return (ticket_amount / maxTickets) * 90;
 };
 
+// Calculate horizontal position based on ticket amount
+const calculateHorizontalPosition = (ticket_amount) => {
+  const maxTickets = 200; // Define the maximum number of tickets
+  return (96-(ticket_amount / maxTickets) * 100).toFixed(2); // Calculate the percentage
+};
+
+
 const RaceTrack = () => {
   return (
     <Track>
@@ -81,7 +89,7 @@ const RaceTrack = () => {
         <Lane key={index} numberOfLanes={carsData.length}>
           <Car
             src={carImage} 
-            position={calculatePosition(car.ticket_amount)}
+            position={calculateHorizontalPosition(car.ticket_amount)}
             color={(index * 360) / carsData.length} // Distribute colors across the spectrum
             alt={`Car driven by ${car.name}`}
           />
