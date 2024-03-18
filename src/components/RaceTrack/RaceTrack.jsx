@@ -21,6 +21,7 @@ const Lane = styled.div`
   width: 90%; /* Adjust width as needed */
   border-bottom: 2px dashed yellow;
   position: relative;
+  right: 2.5%;
   &:last-child {
     border-bottom: none;
   }
@@ -38,6 +39,17 @@ const Car = styled.img`
   transition: bottom 0.5s ease-in-out; // Smooth transition for the movement
 `;
 
+const NameTag = styled.div`
+  position: absolute;
+  top: 50%; /* Align vertically with the car */
+  transform: translateY(-50%); /* Center the name tag vertically with the car */
+  left: calc(100% + 10px); /* Place it just to the right of the car, adjust as needed */
+  white-space: nowrap; /* Keep the name in a single line */
+  color: #fff; /* Text color, choose as needed */
+  font-size: 12px; /* Choose an appropriate size for the name tag */
+  font-weight: bold; /* Optional: make it bold */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6); /* Optional: text shadow for better readability */
+`;
 
 const carsData = [
   { name: "Alex", ticket_amount: 20 },
@@ -86,6 +98,7 @@ const RaceTrack = () => {
             color={(index * 360) / carsData.length} // Distribute colors across the spectrum
             alt={`Car driven by ${car.name}`}
           />
+          <NameTag>{`${car.name}: ${car.ticket_amount}`}</NameTag>
         </Lane>
       ))}
     </Track>
