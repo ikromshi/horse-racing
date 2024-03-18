@@ -1,6 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
 import carImage from '../../assets/car-yellow.png';
+import styled, { keyframes } from 'styled-components';
+
+const bobbing = keyframes`
+  0%, 100% {
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    transform: translateY(-55%) scale(1.05);
+  }
+`;
+
 
 const Track = styled.div`
   display: flex;
@@ -27,16 +37,46 @@ const Lane = styled.div`
   }
 `;
 
+const smoke = keyframes`
+  0% {
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+`;
+
+const CarWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  right: ${props => props.position}%;
+  transform: translateY(-50%);
+  height: 50px; /* Match the car's height */
+`;
+
+const ExhaustSmoke = styled.div`
+  position: absolute;
+  bottom: 10px; /* Adjust to position the smoke at the car's exhaust */
+  left: -20px; /* Start the smoke behind the car */
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  background: rgba(155, 155, 155, 0.8); /* Smoke color */
+  border-radius: 50%;
+  animation: ${smoke} 2s ease-out infinite;
+`;
+
 const Car = styled.img`
   height: 20px; // Adjust based on your preference
   position: absolute;
-  // Adjust this value to center the car, it could be positive or negative
-  // You might need to tweak this after inspecting the actual rendered output
   top: 50%;
   transform: translateY(-50%); // This ensures the car is centered regardless of its height
-  right: ${props => props.position}%; /* Position based on tickets */
+  // right: ${props => props.position}%; /* Position based on tickets */
   filter: ${props => `hue-rotate(${props.color}deg)`}; // Change color through hue rotation
   transition: bottom 0.5s ease-in-out; // Smooth transition for the movement
+  animation: ${bobbing} 1.5s ease-in-out infinite;
+
 `;
 
 const NameTag = styled.div`
@@ -92,12 +132,15 @@ const RaceTrack = () => {
     <Track>
       {carsData.map((car, index) => (
         <Lane key={index} numberOfLanes={carsData.length}>
-          <Car
-            src={carImage} 
-            position={calculateHorizontalPosition(car.ticket_amount)}
-            color={(index * 360) / carsData.length} // Distribute colors across the spectrum
-            alt={`Car driven by ${car.name}`}
-          />
+          <CarWrapper position={calculateHorizontalPosition(car.ticket_amount)}>
+            <ExhaustSmoke /> {/* Add the smoke component here */}
+            <Car
+              src={carImage} 
+              position={calculateHorizontalPosition(car.ticket_amount)}
+              color={(index * 360) / carsData.length} // Distribute colors across the spectrum
+              alt={`Car driven by ${car.name}`}
+            />
+          </CarWrapper>
           <NameTag>{`${car.name}: ${car.ticket_amount}`}</NameTag>
         </Lane>
       ))}
