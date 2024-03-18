@@ -1,25 +1,41 @@
-// src/components/RaceTrack/RaceTrack.jsx
 import React from 'react';
-import Car from '../Car/Car'; // Adjust the path as needed
-import './RaceTrack.css';
+import styled from 'styled-components';
 
-const RaceTrack = ({ participants }) => {
-  // Assuming participants is an array of objects { id, name, tickets }
-  const colors = ['#FF5733', '#33FF57', '#3357FF', '#F33FF5', '#F5F33F', /* More colors as needed */];
+const Track = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+`;
 
+
+const Lane = styled.div`
+  height: calc((100vh - 40px) / ${props => props.numberOfLanes}); /* 40px accounts for the padding */
+  width: 90%; /* Adjust width as needed */
+  border-bottom: 2px dashed yellow;
+  position: relative;
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+
+
+const RaceTrack = ({ numberOfLanes }) => {
   return (
-    <div className="race-track">
-      {participants.map((participant, index) => (
-        <div key={participant.id} className="lane">
-          <Car
-            name={participant.name}
-            tickets={participant.tickets}
-            color={colors[index % colors.length]} // Cycle through colors
-          />
-        </div>
+    <Track>
+      {Array.from({ length: numberOfLanes }, (_, index) => (
+        <Lane key={index} numberOfLanes={numberOfLanes} />
       ))}
-    </div>
+    </Track>
   );
 };
+
 
 export default RaceTrack;
