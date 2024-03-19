@@ -93,7 +93,9 @@ const NameTag = styled.div`
   text-shadow: 1px 1px 2px rgba(0,0,0,0.6); /* Optional: text shadow for better readability */
 `;
 
-
+const Name = styled.h3`
+  margin-top: 0;
+`
 
 // Calculate horizontal position based on ticket amount
 const calculateHorizontalPosition = (ticket_amount) => {
@@ -106,6 +108,7 @@ const RaceTrack = () => {
 
   return (
     <Track>
+    <Name>SD ticket race</Name>
       {carsData.map((car, index) => (
         <Lane key={index} numberOfLanes={carsData.length}>
           <CarWrapper position={calculateHorizontalPosition(car.ticket_amount)}>
