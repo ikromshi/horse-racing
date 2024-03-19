@@ -74,7 +74,7 @@ const Car = styled.img`
   position: absolute;
   top: 50%;
   transform: translateY(-50%); // This ensures the car is centered regardless of its height
-  right: ${props => props.position}%; /* Position based on tickets */
+  // right: ${props => props.position}%; /* Position based on tickets */
   filter: ${props => `hue-rotate(${props.color}deg)`}; // Change color through hue rotation
   transition: bottom 0.5s ease-in-out; // Smooth transition for the movement
   animation: ${bobbing} 1.5s ease-in-out infinite;
