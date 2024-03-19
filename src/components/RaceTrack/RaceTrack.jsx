@@ -1,6 +1,8 @@
 import React from 'react';
 import carImage from '../../assets/car-yellow.png';
 import styled, { keyframes } from 'styled-components';
+import carsData from "../../data/carsData.json"
+
 
 const bobbing = keyframes`
   0%, 100% {
@@ -31,7 +33,7 @@ const Lane = styled.div`
   width: 90%; /* Adjust width as needed */
   border-bottom: 2px dashed yellow;
   position: relative;
-  right: 2.5%;
+  right: 4.5%;
   &:last-child {
     border-bottom: none;
   }
@@ -72,7 +74,7 @@ const Car = styled.img`
   position: absolute;
   top: 50%;
   transform: translateY(-50%); // This ensures the car is centered regardless of its height
-  // right: ${props => props.position}%; /* Position based on tickets */
+  right: ${props => props.position}%; /* Position based on tickets */
   filter: ${props => `hue-rotate(${props.color}deg)`}; // Change color through hue rotation
   transition: bottom 0.5s ease-in-out; // Smooth transition for the movement
   animation: ${bobbing} 1.5s ease-in-out infinite;
@@ -91,33 +93,6 @@ const NameTag = styled.div`
   text-shadow: 1px 1px 2px rgba(0,0,0,0.6); /* Optional: text shadow for better readability */
 `;
 
-const carsData = [
-  { name: "Alex", ticket_amount: 20 },
-  { name: "Jordan", ticket_amount: 5 },
-  { name: "Casey", ticket_amount: 50 },
-  { name: "Morgan", ticket_amount: 30 },
-  { name: "Taylor", ticket_amount: 10 },
-  { name: "Jamie", ticket_amount: 80 },
-  { name: "Quinn", ticket_amount: 45 },
-  { name: "Reese", ticket_amount: 0 },
-  { name: "Skyler", ticket_amount: 9 },
-  { name: "Drew", ticket_amount: 50 },
-  { name: "Cameron", ticket_amount: 12 },
-  { name: "Riley", ticket_amount: 70 },
-  { name: "Avery", ticket_amount: 23 },
-  { name: "Peyton", ticket_amount: 75 },
-  { name: "Harper", ticket_amount: 11 },
-  { name: "Charlie", ticket_amount: 7 },
-  { name: "Dakota", ticket_amount: 9 },
-  { name: "Emerson", ticket_amount: 35 },
-  { name: "Finley", ticket_amount: 25 },
-  { name: "Elliot", ticket_amount: 15 },
-  { name: "Jordan", ticket_amount: 5 },
-  { name: "Logan", ticket_amount: 140 },
-  { name: "Logan", ticket_amount: 36 },
-  { name: "Spencer", ticket_amount: 44 },
-  { name: "Spencer", ticket_amount: 150 }
-];
 
 
 // Calculate horizontal position based on ticket amount
@@ -128,6 +103,7 @@ const calculateHorizontalPosition = (ticket_amount) => {
 
 
 const RaceTrack = () => {
+
   return (
     <Track>
       {carsData.map((car, index) => (
@@ -141,7 +117,7 @@ const RaceTrack = () => {
               alt={`Car driven by ${car.name}`}
             />
           </CarWrapper>
-          <NameTag>{`${car.name}: ${car.ticket_amount}`}</NameTag>
+          <NameTag>{`${car.name.split(" ")[0]}: ${car.ticket_amount}`}</NameTag>
         </Lane>
       ))}
     </Track>
