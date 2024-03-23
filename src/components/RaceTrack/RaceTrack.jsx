@@ -29,11 +29,12 @@ const Track = styled.div`
 
 
 const Lane = styled.div`
-  height: calc((100vh - 40px) / ${props => props.numberOfLanes}); /* 40px accounts for the padding */
-  width: 90%; /* Adjust width as needed */
-  border-bottom: 2px dashed yellow;
+  height: calc((100vh - 10px) / ${props => props.numberOfLanes}); /* 40px accounts for the padding */
+  width: 100%; /* Adjust width as needed */
+  border-bottom: 1px dashed rgba(235, 235, 107, 0.3);
   position: relative;
-  right: 4.5%;
+  // right: 4.5%; -->
+  // width: 90%; in case there's something to be added to the left
   &:last-child {
     border-bottom: none;
   }
@@ -86,15 +87,19 @@ const NameTag = styled.div`
   top: 50%; /* Align vertically with the car */
   transform: translateY(-50%); /* Center the name tag vertically with the car */
   left: calc(100% + 10px); /* Place it just to the right of the car, adjust as needed */
-  white-space: nowrap; /* Keep the name in a single line */
-  color: #fff; /* Text color, choose as needed */
+  white-space: nowrap; /* Keep the name in a single line */  
+  color: #b7995e; /* Text color, choose as needed */
+  filter: ${props => `hue-rotate(${props.color}deg)`}; // Change color through hue rotation
   font-size: 12px; /* Choose an appropriate size for the name tag */
   font-weight: bold; /* Optional: make it bold */
   text-shadow: 1px 1px 2px rgba(0,0,0,0.6); /* Optional: text shadow for better readability */
+  left: 0;
+  margin-left: 
 `;
 
 const Name = styled.h3`
   margin-top: 0;
+  color: white;
 `
 
 
@@ -142,8 +147,13 @@ const RaceTrack = () => {
               color={(index * 360) / carsData.length} // Distribute colors across the spectrum
               alt={`Car driven by ${car.name}`}
             />
+            <NameTag 
+              color={(index * 360) / carsData.length} // Distribute colors across the spectrum
+              style={{ left: `${calculateHorizontalPosition(car.ticket_amount)}%`, marginLeft: '50px' }}>{car.name.split(" ")[0]}
+              </NameTag>
+
           </CarWrapper>
-          <NameTag>{`${car.name.split(" ")[0]}: ${car.ticket_amount}`}</NameTag>
+          {/* <NameTag>{`${car.name.split(" ")[0]}: ${car.ticket_amount}`}</NameTag> */}
         </Lane>
       ))}
       {/* <Credit>&#169;ikromshi.com</Credit> */}
