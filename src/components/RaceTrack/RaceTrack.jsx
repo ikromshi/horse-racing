@@ -6,19 +6,19 @@ import carsData from "../../data/carsData.json"
 
 const bobbing = keyframes`
   0%, 100% {
-    transform: translateY(-50%) scale(1);
+    transform: translateX(0) scale(1);
   }
   50% {
-    transform: translateY(-55%) scale(1.05);
+    transform: translateX(-5%) scale(1.05);
   }
 `;
 
 
 const Track = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: row; /* changed to row for horizontal layout */
+  align-items: flex-end; /* align cars to the bottom */
+  justify-content: center;
   background-color: black;
   width: 100vw;
   height: 100vh;
@@ -29,14 +29,12 @@ const Track = styled.div`
 
 
 const Lane = styled.div`
-  height: calc((100vh - 10px) / ${props => props.numberOfLanes}); /* 40px accounts for the padding */
-  width: 100%; /* Adjust width as needed */
-  border-bottom: 1px dashed rgba(235, 235, 107, 0.3);
+  width: calc((100vw - 40px) / ${props => props.numberOfLanes}); /* 40px accounts for the padding */
+  height: 100%;
+  border-right: 1px dashed rgba(235, 235, 107, 0.3); /* vertical border */
   position: relative;
-  // right: 4.5%; -->
-  // width: 90%; in case there's something to be added to the left
   &:last-child {
-    border-bottom: none;
+    border-right: none;
   }
 `;
 
@@ -53,33 +51,31 @@ const smoke = keyframes`
 
 const CarWrapper = styled.div`
   position: absolute;
-  top: 50%;
-  right: ${props => props.position}%;
-  transform: translateY(-50%);
-  height: 50px; /* Match the car's height */
+  top: ${props => props.position}%; /* changed to bottom for vertical movement */
+  left: 50%;
+  transform: translateX(-50%) rotate(-90deg); /* rotate the car */
+  width: 50px;
 `;
 
 const ExhaustSmoke = styled.div`
   position: absolute;
-  bottom: 10px; /* Adjust to position the smoke at the car's exhaust */
-  left: -20px; /* Start the smoke behind the car */
-  width: 20px; /* Adjust size as needed */
-  height: 20px; /* Adjust size as needed */
-  background: rgba(155, 155, 155, 0.8); /* Smoke color */
+  top: 5px;
+  // right: -20px;
+  width: 20px;
+  height: 20px;
+  background: rgba(155, 155, 155, 0.8);
   border-radius: 50%;
   animation: ${smoke} 2s ease-out infinite;
 `;
 
 const Car = styled.img`
-  height: 20px; // Adjust based on your preference
+  width: 40px;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%); // This ensures the car is centered regardless of its height
-  // right: ${props => props.position}%; /* Position based on tickets */
-  filter: ${props => `hue-rotate(${props.color}deg)`}; // Change color through hue rotation
-  transition: bottom 0.5s ease-in-out; // Smooth transition for the movement
+  left: 70%;
+  transform: translateX(-50%);
+  filter: ${props => `hue-rotate(${props.color}deg)`};
+  transition: right 0.5s ease-in-out;
   animation: ${bobbing} 1.5s ease-in-out infinite;
-
 `;
 
 const NameTag = styled.div`
@@ -133,19 +129,19 @@ const RaceTrack = () => {
 
   return (
     <Track>
-    <Name>SD ticket race</Name>
+    {/* <Name>SD ticket race</Name> */}
       {carsData.map((car, index) => (
         (car.name.split(" ")[0] !== "Donavan" &&  car.name.split(" ")[0] !== "Dusan" && car.name.split(" ")[0] !== "Tyler")
         &&
         <Lane key={index} numberOfLanes={carsData.length}>
           <CarWrapper position={calculateHorizontalPosition(car.ticket_amount)}>
-            <ExhaustSmoke />
             <Car
               src={carImage} 
               position={calculateHorizontalPosition(car.ticket_amount)}
               color={(index * 360) / carsData.length} // Distribute colors across the spectrum
               alt={`Car driven by ${car.name}`}
             />
+            <ExhaustSmoke />
             <NameTag 
               color={(index * 360) / carsData.length} // Distribute colors across the spectrum
               style={{ left: `${calculateHorizontalPosition(car.ticket_amount)}%`, marginLeft: '50px' }}>{car.name.split(" ")[0]}
@@ -153,11 +149,11 @@ const RaceTrack = () => {
           </CarWrapper>
         </Lane>
       ))}
-      <CreditFooter>
+      {/* <CreditFooter>
         <a href="https://ikromshi.com" target="_blank" rel="noopener noreferrer">
           &#169;ikromshi.com
         </a>
-      </CreditFooter>
+      </CreditFooter> */}
     </Track>
   );
 };
