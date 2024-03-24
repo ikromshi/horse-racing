@@ -103,7 +103,6 @@ const Name = styled.h3`
 `
 
 
-// Styled component for the footer
 const CreditFooter = styled.div`
   width: 100%;
   padding: 10px 0;
@@ -125,7 +124,7 @@ const CreditFooter = styled.div`
 
 // Calculate horizontal position based on ticket amount
 const calculateHorizontalPosition = (ticket_amount) => {
-  const maxTickets = 250; // Define the maximum number of tickets
+  const maxTickets = 250; 
   return (96-(ticket_amount / maxTickets) * 100).toFixed(2); // Calculate the percentage
 };
 
@@ -140,7 +139,7 @@ const RaceTrack = () => {
         &&
         <Lane key={index} numberOfLanes={carsData.length}>
           <CarWrapper position={calculateHorizontalPosition(car.ticket_amount)}>
-            <ExhaustSmoke /> {/* Add the smoke component here */}
+            <ExhaustSmoke />
             <Car
               src={carImage} 
               position={calculateHorizontalPosition(car.ticket_amount)}
@@ -151,12 +150,9 @@ const RaceTrack = () => {
               color={(index * 360) / carsData.length} // Distribute colors across the spectrum
               style={{ left: `${calculateHorizontalPosition(car.ticket_amount)}%`, marginLeft: '50px' }}>{car.name.split(" ")[0]}
               </NameTag>
-
           </CarWrapper>
-          {/* <NameTag>{`${car.name.split(" ")[0]}: ${car.ticket_amount}`}</NameTag> */}
         </Lane>
       ))}
-      {/* <Credit>&#169;ikromshi.com</Credit> */}
       <CreditFooter>
         <a href="https://ikromshi.com" target="_blank" rel="noopener noreferrer">
           &#169;ikromshi.com
