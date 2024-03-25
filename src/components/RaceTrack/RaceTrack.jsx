@@ -1,8 +1,10 @@
 import React from 'react';
 import carImage from '../../assets/car-yellow.png';
 import styled, { keyframes } from 'styled-components';
-import carsData from "../../data/carsData.json"
+import carsData from "../../data/carsData.json";
+import hornSound from "../../assets/honk.mp3";
 
+const audioRef = React.createRef();
 
 const bobbing = keyframes`
   0%, 100% {
@@ -128,11 +130,16 @@ const calculateHorizontalPosition = (ticket_amount) => {
   return (96-(ticket_amount / maxTickets) * 100).toFixed(2); // Calculate the percentage
 };
 
+// Function to play horn sound
+const playHornSound = () => {
+  audioRef.current.play();
+};
 
 const RaceTrack = () => {
 
   return (
     <Track>
+    <audio ref={audioRef} src={hornSound} />
     <Name>SD ticket race</Name>
       {carsData.map((car, index) => (
         (car.name.split(" ")[0] !== "Donavan" &&  car.name.split(" ")[0] !== "Dusan" && car.name.split(" ")[0] !== "Tyler")
@@ -145,6 +152,7 @@ const RaceTrack = () => {
               position={calculateHorizontalPosition(car.ticket_amount)}
               color={(index * 360) / carsData.length} // Distribute colors across the spectrum
               alt={`Car driven by ${car.name}`}
+              onClick={playHornSound}
             />
             <NameTag 
               color={(index * 360) / carsData.length} // Distribute colors across the spectrum
