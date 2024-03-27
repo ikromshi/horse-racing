@@ -1,6 +1,6 @@
 import React from 'react';
 import carImage from '../../assets/car-yellow.png';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import carsData from "../../data/carsData.json";
 import hornSound from "../../assets/honk.mp3";
 
@@ -31,8 +31,8 @@ const Track = styled.div`
 
 
 const Lane = styled.div`
-  height: calc((100vh - 10px) / ${props => props.numberOfLanes}); /* 40px accounts for the padding */
-  width: 100%; /* Adjust width as needed */
+  height: calc((100vh - 10px) / ${props => props.numberOfLanes}); 
+  width: 100%; 
   border-bottom: 1px dashed rgba(235, 235, 107, 0.3);
   position: relative;
   // right: 4.5%; -->
@@ -56,18 +56,18 @@ const smoke = keyframes`
 const CarWrapper = styled.div`
   position: absolute;
   top: 50%;
-  right: ${props => props.position}%;
+  left: ${props => props.position}%;
   transform: translateY(-50%);
-  height: 50px; /* Match the car's height */
+  height: 50px; 
 `;
 
 const ExhaustSmoke = styled.div`
   position: absolute;
-  bottom: 10px; /* Adjust to position the smoke at the car's exhaust */
-  left: -20px; /* Start the smoke behind the car */
-  width: 20px; /* Adjust size as needed */
-  height: 20px; /* Adjust size as needed */
-  background: rgba(155, 155, 155, 0.8); /* Smoke color */
+  bottom: 10px; 
+  left: -20px; 
+  width: 20px; 
+  height: 20px; 
+  background: rgba(155, 155, 155, 0.8); 
   border-radius: 50%;
   animation: ${smoke} 2s ease-out infinite;
 `;
@@ -77,7 +77,7 @@ const Car = styled.img`
   position: absolute;
   top: 50%;
   transform: translateY(-50%); // This ensures the car is centered regardless of its height
-  // right: ${props => props.position}%; /* Position based on tickets */
+  // right: ${props => props.position}%; 
   filter: ${props => `hue-rotate(${props.color}deg)`}; // Change color through hue rotation
   transition: bottom 0.5s ease-in-out; // Smooth transition for the movement
   animation: ${bobbing} 1.5s ease-in-out infinite;
@@ -86,19 +86,44 @@ const Car = styled.img`
 
 const NameTag = styled.div`
   position: absolute;
-  top: 50%; /* Align vertically with the car */
-  transform: translateY(-50%); /* Center the name tag vertically with the car */
-  left: calc(100% + 10px); /* Place it just to the right of the car, adjust as needed */
-  white-space: nowrap; /* Keep the name in a single line */  
-  color: #b7995e; /* Text color, choose as needed */
+  top: 50%; 
+  transform: translateY(-50%); 
+  left: calc(100% + 10px); 
+  white-space: nowrap; 
+  color: #b7995e; 
   filter: ${props => `hue-rotate(${props.color}deg)`}; // Change color through hue rotation
-  font-size: 12px; /* Choose an appropriate size for the name tag */
-  font-weight: bold; /* Optional: make it bold */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.6); /* Optional: text shadow for better readability */
+  font-size: 12px; 
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6); 
   left: 0;
   margin-left: 
 `;
 
+const glowing = keyframes`
+  0% { color: #9b5de5;  }
+  20% { color: #f72585; }
+  40% { color: #b5179e; }
+  60% { color: #3f37c9; }
+  80% { color: #00bbf9; }
+  100% { color: #00f5d4; }
+`;
+
+const LapIndicator = styled.div`
+  position: absolute;
+  // bottom: 0;
+  top: 16%;
+  left: calc(100% - 50px); -->> CHANGE THE PIXEL AMOUNT TO MOVE THE LAP INDICATOR BEHIND OR AHEAD OF THE CAR <<--
+  white-space: nowrap; 
+  color: ${props => props.lapsFinished > 0 ? `rgba(255, 255, 255, 0.7)` : `transparent`};;
+  font-weight: bold;
+  padding: 2px 5px;
+  font-style: italic;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  // background-color: ${props => props.lapsFinished > 0 ? `rgba(255, 255, 255, 0.7)` : `transparent`};
+  animation: ${props => props.lapsFinished > 0 ? css`${glowing} 2s infinite` : 'none'};
+  
+`;
 const Name = styled.h3`
   margin-top: 0;
   color: white;
@@ -123,12 +148,18 @@ const CreditFooter = styled.div`
   }
 `;
 
+const maxTickets = 95; 
 
 // Calculate horizontal position based on ticket amount
 const calculateHorizontalPosition = (ticket_amount) => {
-  const maxTickets = 250; 
-  return (96-(ticket_amount / maxTickets) * 100).toFixed(2); // Calculate the percentage
+  const effectiveTickets = ticket_amount % maxTickets;
+  // return (96-(ticket_amount / maxTickets) * 100).toFixed(2); // Calculate the percentage
+  return effectiveTickets; // calculate the eddective tickets based on max tickets;
 };
+
+const calculateLapsFinished = (ticket_amount) => {
+  return (Math.floor(ticket_amount / maxTickets)); // calculate how many times the race has been finished;
+}
 
 // Function to play horn sound
 const playHornSound = () => {
@@ -142,10 +173,15 @@ const RaceTrack = () => {
     <audio ref={audioRef} src={hornSound} />
     <Name>SD ticket race</Name>
       {carsData.map((car, index) => (
-        (car.name.split(" ")[0] !== "Donavan" &&  car.name.split(" ")[0] !== "Dusan" && car.name.split(" ")[0] !== "Tyler")
+        (car.name.split(" ")[1] !== "Duffus" &&  car.name.split(" ")[1] !== "Ducic" && car.name.split(" ")[1] !== "Campolongo")
         &&
         <Lane key={index} numberOfLanes={carsData.length}>
           <CarWrapper position={calculateHorizontalPosition(car.ticket_amount)}>
+          {calculateLapsFinished(car.ticket_amount) > 0 && (
+            <LapIndicator lapsFinished={calculateLapsFinished(car.ticket_amount)}>
+              x{calculateLapsFinished(car.ticket_amount) + 1}
+            </LapIndicator>
+          )}
             <ExhaustSmoke />
             <Car
               src={carImage} 
