@@ -148,6 +148,38 @@ const CreditFooter = styled.div`
   }
 `;
 
+const TicketAxis = styled.div`
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px; // Adjust the height as needed
+  display: flex;
+  align-items: center;
+  color: grey; // Color of the text
+  font-style: italic;
+  font-weight: bold;
+`;
+
+const Milestone = styled.div`
+  text-align: center;
+  flex-grow: 1;
+
+  &:first-child {
+    text-align: left;
+  }
+
+  &:last-child {
+    text-align: right;
+  }
+`;
+
+const AxisLine = styled.div`
+  height: 1px; // Height of the line, representing its thickness
+  background-color: grey; // Color of the line
+  flex-grow: 5; // Allows the line to fill the space between milestones
+`;
+
+
 const maxTickets = 95; 
 
 // Calculate horizontal position based on ticket amount
@@ -172,6 +204,13 @@ const RaceTrack = () => {
     <Track>
     <audio ref={audioRef} src={hornSound} />
     <Name>SD ticket race</Name>
+    <TicketAxis>
+        <Milestone>0</Milestone>
+        <AxisLine />
+        <Milestone>50</Milestone>
+        <AxisLine />
+        <Milestone>100</Milestone>
+      </TicketAxis>
       {carsData.map((car, index) => (
         (car.name.split(" ")[1] !== "Duffus" &&  car.name.split(" ")[1] !== "Ducic" && car.name.split(" ")[1] !== "Campolongo")
         &&
@@ -197,6 +236,7 @@ const RaceTrack = () => {
           </CarWrapper>
         </Lane>
       ))}
+      
       <CreditFooter>
         <a href="https://ikromshi.com" target="_blank" rel="noopener noreferrer">
           &#169;ikromshi.com
