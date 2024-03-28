@@ -32,7 +32,7 @@ const Track = styled.div`
 
 const Lane = styled.div`
   height: calc((100vh - 10px) / ${props => props.numberOfLanes}); 
-  width: 98%; 
+  width: 100%; 
   border-bottom: 1px dashed rgba(235, 235, 107, 0.3);
   position: relative;
   // right: 4.5%; -->
