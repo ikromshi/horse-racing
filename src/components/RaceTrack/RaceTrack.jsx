@@ -136,10 +136,10 @@ const CreditFooter = styled.div`
   text-align: left;
   padding-left: 10px;
   bottom: 0;
-  color: #2d8882; // Optional: Change as needed
+  color: #2d8882;
 
   a {
-    color: #2d8882; // Optional: Change as needed
+    color: #2d8882;
     text-decoration: none;
 
     &:hover {
@@ -149,13 +149,11 @@ const CreditFooter = styled.div`
 `;
 
 const TicketAxis = styled.div`
-  bottom: 0;
-  left: 0;
-  width: 98%;
-  height: 25px; // Adjust the height as needed
+  width: 100%;
+  height: 25px;
   display: flex;
   align-items: center;
-  color: grey; // Color of the text
+  color: grey;
   font-style: italic;
   font-weight: bold;
 `;
@@ -174,9 +172,9 @@ const Milestone = styled.div`
 `;
 
 const AxisLine = styled.div`
-  height: 1px; // Height of the line, representing its thickness
-  background-color: grey; // Color of the line
-  flex-grow: 20; // Allows the line to fill the space between milestones
+  height: 1px;
+  background-color: grey;
+  flex-grow: 30;
 `;
 
 const FinishLine = styled.div`
@@ -229,7 +227,7 @@ const RaceTrack = () => {
         <Milestone>50</Milestone>
         <AxisLine />
         <Milestone>100</Milestone>
-      </TicketAxis>
+    </TicketAxis>
       {carsData.map((car, index) => (
         (car.name.split(" ")[1] !== "Duffus" &&  car.name.split(" ")[1] !== "Ducic" && car.name.split(" ")[1] !== "Campolongo")
         &&
