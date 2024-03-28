@@ -32,7 +32,7 @@ const Track = styled.div`
 
 const Lane = styled.div`
   height: calc((100vh - 10px) / ${props => props.numberOfLanes}); 
-  width: 100%; 
+  width: 98%; 
   border-bottom: 1px dashed rgba(235, 235, 107, 0.3);
   position: relative;
   // right: 4.5%; -->
@@ -151,8 +151,8 @@ const CreditFooter = styled.div`
 const TicketAxis = styled.div`
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 20px; // Adjust the height as needed
+  width: 98%;
+  height: 25px; // Adjust the height as needed
   display: flex;
   align-items: center;
   color: grey; // Color of the text
@@ -176,7 +176,26 @@ const Milestone = styled.div`
 const AxisLine = styled.div`
   height: 1px; // Height of the line, representing its thickness
   background-color: grey; // Color of the line
-  flex-grow: 5; // Allows the line to fill the space between milestones
+  flex-grow: 20; // Allows the line to fill the space between milestones
+`;
+
+const FinishLine = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 10px; /* Adjust the width of the finish line as needed */
+  background-image: linear-gradient(
+    45deg,
+    #0091ad 25%,
+    transparent 25%,
+    transparent 50%,
+    #0091ad 50%,
+    #0091ad 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 30px 30px; /* Adjust the size of the chequers */
 `;
 
 
@@ -234,6 +253,7 @@ const RaceTrack = () => {
               style={{ left: `${calculateHorizontalPosition(car.ticket_amount)}%`, marginLeft: '50px' }}>{car.name.split(" ")[0]}
               </NameTag>
           </CarWrapper>
+          <FinishLine />
         </Lane>
       ))}
       
