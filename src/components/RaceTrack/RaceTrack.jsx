@@ -73,7 +73,7 @@ const ExhaustSmoke = styled.div`
 `;
 
 const Car = styled.img`
-  height: 20px; // Adjust based on your preference
+  height: 25px; // Adjust based on your preference
   position: absolute;
   top: 50%;
   transform: translateY(-50%); // This ensures the car is centered regardless of its height
@@ -92,11 +92,10 @@ const NameTag = styled.div`
   white-space: nowrap; 
   color: #b7995e; 
   filter: ${props => `hue-rotate(${props.color}deg)`}; // Change color through hue rotation
-  font-size: 12px; 
+  font-size: 18px; 
   font-weight: bold;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.6); 
-  left: 0;
-  margin-left: 
+  // margin-left: 70px;
 `;
 
 const glowing = keyframes`
@@ -248,7 +247,7 @@ const RaceTrack = () => {
             />
             <NameTag 
               color={(index * 360) / carsData.length} // Distribute colors across the spectrum
-              style={{ left: `${calculateHorizontalPosition(car.ticket_amount)}%`, marginLeft: '50px' }}>{car.name.split(" ")[0]}
+              style={{ left: `${calculateHorizontalPosition(car.ticket_amount)}%`, marginLeft: '70px' }}>{car.name.split(" ")[0]}
               </NameTag>
           </CarWrapper>
           <FinishLine />
