@@ -123,7 +123,7 @@ const LapIndicator = styled.div`
   animation: ${props => props.lapsFinished > 0 ? css`${glowing} 2s infinite` : 'none'};
   
 `;
-const Name = styled.h3`
+const Name = styled.h2`
   margin-top: 0;
   color: white;
 `
@@ -158,6 +158,7 @@ const TicketAxis = styled.div`
 `;
 
 const Milestone = styled.div`
+  font-size: 18px;
   text-align: center;
   flex-grow: 1;
 
