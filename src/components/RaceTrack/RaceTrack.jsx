@@ -220,7 +220,7 @@ const RaceTrack = () => {
   return (
     <Track>
     <audio ref={audioRef} src={hornSound} />
-    <Name>SD ticket race</Name>
+    <Name>PitStop Prodigies</Name>
     <TicketAxis>
         <Milestone>0</Milestone>
         <AxisLine />
@@ -231,11 +231,12 @@ const RaceTrack = () => {
       {carsData.map((car, index) => (
         (car.name.split(" ")[1] !== "Duffus" &&  car.name.split(" ")[1] !== "Ducic" && car.name.split(" ")[1] !== "Campolongo")
         &&
+
         <Lane key={index} numberOfLanes={carsData.length}>
           <CarWrapper position={calculateHorizontalPosition(car.ticket_amount)}>
           {calculateLapsFinished(car.ticket_amount) > 0 && (
             <LapIndicator lapsFinished={calculateLapsFinished(car.ticket_amount)}>
-              x{calculateLapsFinished(car.ticket_amount) + 1}
+              x{calculateLapsFinished(car.ticket_amount)}
             </LapIndicator>
           )}
             <ExhaustSmoke />
@@ -248,7 +249,8 @@ const RaceTrack = () => {
             />
             <NameTag 
               color={(index * 360) / carsData.length} // Distribute colors across the spectrum
-              style={{ left: `${calculateHorizontalPosition(car.ticket_amount)}%`, marginLeft: '70px' }}>{car.name.split(" ")[0]}
+              style={{ left: `${calculateHorizontalPosition(car.ticket_amount)}%`, marginLeft: '70px' }}>
+              {car.name.startsWith("Claire ") ? `${car.name.split(" ")[0]} ${car.name.split(" ")[1][0]}.` : car.name.split(" ")[0]}
               </NameTag>
           </CarWrapper>
           <FinishLine />
