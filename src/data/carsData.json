@@ -1,16 +1,1 @@
-[
-  { "name": "Kendell Moats", "ticket_amount": 6 },
-  { "name": "David Simmons", "ticket_amount": 4 },
-  { "name": "Claire VanAcker", "ticket_amount": 2 },
-  { "name": "Liam Nelsen", "ticket_amount": 7 },
-  { "name": "Zanyjah Coleman-Northern", "ticket_amount": 8 },
-  { "name": "Tyler Campolongo", "ticket_amount": 2 },
-  { "name": "Dusan Ducic", "ticket_amount": 2 },
-  { "name": "Garen Igho", "ticket_amount": 3 },
-  { "name": "Mara Hanson", "ticket_amount": 4 },
-  { "name": "Jake Squilla", "ticket_amount": 6 },
-  { "name": "Connor Kearns", "ticket_amount": 2 },
-  { "name": "Joshua Wan", "ticket_amount": 10 },
-  { "name": "Ikrom Numonov", "ticket_amount": 2 },
-  { "name": "Hermela Aberra", "ticket_amount": 2 }
-]
+[{"name": "Mara Hanson", "ticket_amount": 14}, {"name": "Hadil Khodji", "ticket_amount": 2}, {"name": "Henry Wickliffe", "ticket_amount": 4}, {"name": "Ty Anderson", "ticket_amount": 9}, {"name": "Brian Martinez", "ticket_amount": 3}, {"name": "Nevin LaBrusciano", "ticket_amount": 7}, {"name": "Connor Kearns", "ticket_amount": 2}, {"name": "Garen Igho", "ticket_amount": 4}, {"name": "Tyler Campolongo", "ticket_amount": 5}, {"name": "Ikrom Numonov", "ticket_amount": 5}, {"name": "Dusan Ducic", "ticket_amount": 3}, {"name": "David Simmons", "ticket_amount": 8}, {"name": "Kendell Moats", "ticket_amount": 6}, {"name": "Matthew Williams", "ticket_amount": 3}, {"name": "Donavan Duffus", "ticket_amount": 3}, {"name": "Hermela Abera", "ticket_amount": 8}, {"name": "Stella Win", "ticket_amount": 5}, {"name": "Claire VanAcker", "ticket_amount": 2}, {"name": "Jake Squilla", "ticket_amount": 7}, {"name": "Liam Nelsen", "ticket_amount": 10}, {"name": "Zanyjah Coleman-Northern", "ticket_amount": 8}, {"name": "Joshua Wan", "ticket_amount": 27}, {"name": "Frankie Valens", "ticket_amount": 8}]
